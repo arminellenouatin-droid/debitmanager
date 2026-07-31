@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "backend/src/main.ts",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    }
+  ],
+  "env": {
+    "DB_HOST": "@db_host",
+    "DB_PORT": "@db_port",
+    "DB_USERNAME": "@db_username",
+    "DB_PASSWORD": "@db_password",
+    "DB_DATABASE": "@db_database",
+    "DB_SYNCHRONIZE": "@db_synchronize",
+    "DB_LOGGING": "@db_logging",
+    "JWT_SECRET": "@jwt_secret",
+    "JWT_EXPIRATION": "@jwt_expiration",
+    "REDIS_HOST": "@redis_host",
+    "REDIS_PORT": "@redis_port",
+    "REDIS_PASSWORD": "@redis_password",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
+    "PAYPAL_CLIENT_ID": "@paypal_client_id",
+    "PAYPAL_CLIENT_SECRET": "@paypal_client_secret",
+    "NODE_ENV": "@node_env",
+    "PORT": "@port",
+    "PLATFORM_COMMISSION_RATE": "@platform_commission_rate"
+  }
+}
