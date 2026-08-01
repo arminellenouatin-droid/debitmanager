@@ -9,10 +9,10 @@ const databaseConfig = (configService) => ({
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
-    entities: [(0, path_1.join)(__dirname, '..', 'modules', '**', '*.entity{.ts,.js}')],
-    migrations: [(0, path_1.join)(__dirname, '..', 'database', 'migrations', '*{.ts,.js}')],
+    entities: [(0, path_1.join)(__dirname, 'modules', '**', '*.entity{.ts,.js}')],
+    migrations: [(0, path_1.join)(__dirname, 'database', 'migrations', '*{.ts,.js}')],
     synchronize: configService.get('DB_SYNCHRONIZE', false),
-    logging: configService.get('DB_LOGGING', true),
+    logging: configService.get('DB_LOGGING', false),
     ssl: { rejectUnauthorized: false },
 });
 exports.databaseConfig = databaseConfig;
