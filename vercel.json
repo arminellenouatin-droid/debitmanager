@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "buildCommand": "cd backend && npm install --include=dev && npm run build",
-  "outputDirectory": "backend/dist",
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "backend/dist/main.js"
+      "dest": "api/index.js"
     }
-  ]
+  ],
+  "installCommand": "cd backend && npm install --include=dev",
+  "buildCommand": "cd backend && npm run build"
 }
