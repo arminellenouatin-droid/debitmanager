@@ -20,7 +20,7 @@ function copyDir(src, dest) {
 const sourcePath = path.join(__dirname, '../../api/index.js');
 const targetDir = path.join(__dirname, '../dist/api');
 const targetPath = path.join(targetDir, 'index.js');
-const apiDistDir = path.join(__dirname, '../../api/dist');
+const apiDir = path.join(__dirname, '../../api');
 const backendDistDir = path.join(__dirname, '../dist');
 
 // Create directory if it doesn't exist
@@ -31,16 +31,26 @@ if (!fs.existsSync(targetDir)) {
 // Read the source file
 let content = fs.readFileSync(sourcePath, 'utf8');
 
-// Replace the require path to use relative path from api/dist
-content = content.replace("require('../backend/dist/app.module')", "require('./dist/app.module')");
+// Replace the require path to use relative path from api (no subfolder)
+content = content.replace("require('../backend/dist/app.module')", "require('./app.module')");
 
 // Write the modified file to api/index.js (overwrite the original)
 fs.writeFileSync(sourcePath, content);
-console.log('Modified api/index.js to use ./dist/app.module');
+console.log('Modified api/index.js to use ./app.module');
 
-// Copy the entire dist folder to api/dist using Node.js
-if (fs.existsSync(apiDistDir)) {
-  fs.rmSync(apiDistDir, { recursive: true, force: true });
+// Copy the entire dist folder contents directly to api folder (no subfolder)
+const entries = fs.readdirSync(backendDistDir, { withFileTypes: true });
+for (const entry of entries) {
+  const srcPath = path.join(backendDistDir, entry.name);
+  const destPath = path.join(apiDir, entry.name);
+  
+  if (entry.isDirectory()) {
+    if (fs.existsSync(destPath)) {
+      fs.rmSync(destPath, { recursive: true, force: true });
+    }
+    copyDir(srcPath, destPath);
+  } else {
+    fs.copyFileSync(srcPath, destPath);
+  }
 }
-copyDir(backendDistDir, apiDistDir);
-console.log('Copied dist folder to api/dist');
+console.log('Copied dist folder contents to api folder');

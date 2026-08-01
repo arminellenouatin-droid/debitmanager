@@ -21,6 +21,7 @@ yarn-error.log*
 # BUILD OUTPUTS
 # ============================================
 backend/dist/
+api/dist/
 build/
 out/
 .next/
