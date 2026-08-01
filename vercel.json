@@ -1,10 +1,15 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "backend/dist",
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/api/index.js"
+      "src": "backend/src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "backend/src/main.ts"
     }
   ]
 }
