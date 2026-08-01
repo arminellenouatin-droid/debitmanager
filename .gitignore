@@ -20,7 +20,7 @@ yarn-error.log*
 # ============================================
 # BUILD OUTPUTS
 # ============================================
-dist/
+backend/dist/
 build/
 out/
 .next/

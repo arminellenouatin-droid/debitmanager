@@ -1,0 +1,96 @@
+import { OrdersService } from '../services/orders.service';
+import { CreateOrderDto } from '../dto/create-order.dto';
+import { UpdateOrderDto } from '../dto/update-order.dto';
+import { AddItemDto } from '../dto/add-item.dto';
+export declare class OrdersController {
+    private readonly ordersService;
+    constructor(ordersService: OrdersService);
+    create(createOrderDto: CreateOrderDto, tenantId: string, userId: string): Promise<{
+        id: string;
+        tenantId: string;
+        tableId: string;
+        serverUserId: string;
+        status: import("../entities/order.entity").OrderStatus;
+        source: import("../entities/order.entity").OrderSource;
+        offlineCreated: boolean;
+        clientGeneratedId: string;
+        cancelledReason: string;
+        cancelledByUserId: string;
+        totalAmount: number;
+        createdAt: Date;
+        updatedAt: Date;
+        table?: import("../../tables/entities/table.entity").Table;
+        items: import("../entities/order-item.entity").OrderItem[];
+    }>;
+    findAll(tenantId: string): Promise<{
+        id: string;
+        tenantId: string;
+        tableId: string;
+        serverUserId: string;
+        status: import("../entities/order.entity").OrderStatus;
+        source: import("../entities/order.entity").OrderSource;
+        offlineCreated: boolean;
+        clientGeneratedId: string;
+        cancelledReason: string;
+        cancelledByUserId: string;
+        totalAmount: number;
+        createdAt: Date;
+        updatedAt: Date;
+        table?: import("../../tables/entities/table.entity").Table;
+        items: import("../entities/order-item.entity").OrderItem[];
+    }[]>;
+    findOne(id: string, tenantId: string): Promise<{
+        id: string;
+        tenantId: string;
+        tableId: string;
+        serverUserId: string;
+        status: import("../entities/order.entity").OrderStatus;
+        source: import("../entities/order.entity").OrderSource;
+        offlineCreated: boolean;
+        clientGeneratedId: string;
+        cancelledReason: string;
+        cancelledByUserId: string;
+        totalAmount: number;
+        createdAt: Date;
+        updatedAt: Date;
+        table?: import("../../tables/entities/table.entity").Table;
+        items: import("../entities/order-item.entity").OrderItem[];
+    }>;
+    update(id: string, updateOrderDto: UpdateOrderDto, tenantId: string): Promise<{
+        id: string;
+        tenantId: string;
+        tableId: string;
+        serverUserId: string;
+        status: import("../entities/order.entity").OrderStatus;
+        source: import("../entities/order.entity").OrderSource;
+        offlineCreated: boolean;
+        clientGeneratedId: string;
+        cancelledReason: string;
+        cancelledByUserId: string;
+        totalAmount: number;
+        createdAt: Date;
+        updatedAt: Date;
+        table?: import("../../tables/entities/table.entity").Table;
+        items: import("../entities/order-item.entity").OrderItem[];
+    }>;
+    addItem(id: string, addItemDto: AddItemDto, tenantId: string): Promise<{
+        id: string;
+        tenantId: string;
+        tableId: string;
+        serverUserId: string;
+        status: import("../entities/order.entity").OrderStatus;
+        source: import("../entities/order.entity").OrderSource;
+        offlineCreated: boolean;
+        clientGeneratedId: string;
+        cancelledReason: string;
+        cancelledByUserId: string;
+        totalAmount: number;
+        createdAt: Date;
+        updatedAt: Date;
+        table?: import("../../tables/entities/table.entity").Table;
+        items: import("../entities/order-item.entity").OrderItem[];
+    }>;
+    cancel(id: string, tenantId: string): Promise<{
+        message: string;
+    }>;
+}

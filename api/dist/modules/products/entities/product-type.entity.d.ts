@@ -1,0 +1,8 @@
+export declare class ProductType {
+    id: string;
+    tenantId: string;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+    deletedAt: Date;
+}
