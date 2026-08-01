@@ -1,28 +1,62 @@
 const { NestFactory } = require('@nestjs/core');
 const { ExpressAdapter } = require('@nestjs/platform-express');
-const { AppModule } = require('./app.module');
 const express = require('express');
 
 let cachedServer;
 
 async function bootstrap() {
-  if (!cachedServer) {
-    const expressApp = express();
-    const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+  try {
+    console.log('[BOOTSTRAP] Starting bootstrap...');
     
-    // Enable CORS
-    app.enableCors({
-      origin: true,
-      credentials: true,
-    });
+    if (!cachedServer) {
+      console.log('[BOOTSTRAP] Creating express app...');
+      const expressApp = express();
+      
+      console.log('[BOOTSTRAP] Loading AppModule...');
+      const { AppModule } = require('./app.module');
+      console.log('[BOOTSTRAP] AppModule loaded successfully');
+      
+      console.log('[BOOTSTRAP] Creating NestJS app...');
+      const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+      console.log('[BOOTSTRAP] NestJS app created');
+      
+      // Enable CORS
+      console.log('[BOOTSTRAP] Enabling CORS...');
+      app.enableCors({
+        origin: true,
+        credentials: true,
+      });
+      
+      console.log('[BOOTSTRAP] Initializing app...');
+      await app.init();
+      console.log('[BOOTSTRAP] App initialized');
+      
+      cachedServer = expressApp;
+      console.log('[BOOTSTRAP] Server cached');
+    }
     
-    await app.init();
-    cachedServer = expressApp;
+    console.log('[BOOTSTRAP] Returning cached server');
+    return cachedServer;
+  } catch (error) {
+    console.error('[BOOTSTRAP ERROR]', error);
+    console.error('[BOOTSTRAP ERROR STACK]', error.stack);
+    throw error;
   }
-  return cachedServer;
 }
 
 module.exports = async (req, res) => {
-  const app = await bootstrap();
-  app(req, res);
+  try {
+    console.log('[HANDLER] Request received:', req.method, req.url);
+    const app = await bootstrap();
+    console.log('[HANDLER] Bootstrap completed, handling request');
+    app(req, res);
+  } catch (error) {
+    console.error('[HANDLER ERROR]', error);
+    console.error('[HANDLER ERROR STACK]', error.stack);
+    res.status(500).json({ 
+      error: 'Internal Server Error', 
+      message: error.message,
+      stack: error.stack 
+    });
+  }
 };
