@@ -10,6 +10,12 @@ if (!fs.existsSync(targetDir)) {
   fs.mkdirSync(targetDir, { recursive: true });
 }
 
-// Copy file
-fs.copyFileSync(sourcePath, targetPath);
-console.log('Copied adapter to dist/api/index.js');
+// Read the source file
+let content = fs.readFileSync(sourcePath, 'utf8');
+
+// Replace the require path
+content = content.replace("require('../backend/dist/app.module')", "require('../app.module')");
+
+// Write the modified file
+fs.writeFileSync(targetPath, content);
+console.log('Copied and modified adapter to dist/api/index.js');
