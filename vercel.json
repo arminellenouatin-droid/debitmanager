@@ -5,8 +5,7 @@
       "src": "api/index.js",
       "use": "@vercel/node",
       "config": {
-        "maxLambdaSize": "50mb",
-        "includeFiles": ["backend/dist/**"]
+        "maxLambdaSize": "50mb"
       }
     }
   ],
@@ -17,5 +16,6 @@
     }
   ],
   "installCommand": "cd backend && npm install",
-  "buildCommand": "cd backend && npm run build"
+  "buildCommand": "cd backend && npm run build",
+  "includeFiles": ["backend/dist/**"]
 }
