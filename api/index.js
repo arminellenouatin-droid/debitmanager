@@ -1,6 +1,6 @@
 const { NestFactory } = require('@nestjs/core');
 const { ExpressAdapter } = require('@nestjs/platform-express');
-const { AppModule } = require('./dist/app.module');
+const { AppModule } = require('./app.module');
 const express = require('express');
 
 let cachedServer;
