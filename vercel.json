@@ -1,10 +1,20 @@
 {
-  "buildCommand": "cd backend && npm install --include=dev && npm run build",
-  "outputDirectory": "backend/dist",
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/backend/api/index.js"
+      "src": "backend/dist/api/index.js",
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb"
+      }
     }
-  ]
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "backend/dist/api/index.js"
+    }
+  ],
+  "installCommand": "cd backend && npm install --include=dev",
+  "buildCommand": "cd backend && npm run build && cp api/index.js dist/api/index.js"
 }
