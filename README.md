@@ -2,6 +2,9 @@
 
 Plateforme SaaS mobile & web de gestion de bars, maquis, restaurants, boîtes de nuit et lounges en Afrique de l'Ouest.
 
+## Deployment Status
+Deployed on Vercel
+
 ## Architecture Technique
 
 - **Mobile**: Flutter (iOS/Android, offline-first)
