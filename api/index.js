@@ -1,6 +1,13 @@
+console.log('[MODULE LOADER] Loading index.js...');
+
 const { NestFactory } = require('@nestjs/core');
+console.log('[MODULE LOADER] @nestjs/core loaded');
+
 const { ExpressAdapter } = require('@nestjs/platform-express');
+console.log('[MODULE LOADER] @nestjs/platform-express loaded');
+
 const express = require('express');
+console.log('[MODULE LOADER] express loaded');
 
 let cachedServer;
 
