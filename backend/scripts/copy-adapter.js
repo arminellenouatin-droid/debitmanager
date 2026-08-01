@@ -22,6 +22,7 @@ const targetDir = path.join(__dirname, '../dist/api');
 const targetPath = path.join(targetDir, 'index.js');
 const apiDir = path.join(__dirname, '../../api');
 const backendDistDir = path.join(__dirname, '../dist');
+const envPath = path.join(__dirname, '../../.env');
 
 // Create directory if it doesn't exist
 if (!fs.existsSync(targetDir)) {
@@ -54,3 +55,11 @@ for (const entry of entries) {
   }
 }
 console.log('Copied dist folder contents to api folder');
+
+// Copy .env file to api folder
+if (fs.existsSync(envPath)) {
+  fs.copyFileSync(envPath, path.join(apiDir, '.env'));
+  console.log('Copied .env file to api folder');
+} else {
+  console.log('Warning: .env file not found');
+}
