@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build && mkdir -p dist/api && cp api/index.js dist/api/index.js",
+    "build": "nest build && npx mkdirp dist/api && npx copyfiles api/index.js dist/api/",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
